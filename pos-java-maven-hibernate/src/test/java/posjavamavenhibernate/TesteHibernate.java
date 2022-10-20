@@ -15,11 +15,11 @@ public class TesteHibernate {
 		
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 		pessoa.setIdade(27);
-		pessoa.setLogin("admin");
+		pessoa.setLogin("adminEduardo");
 		pessoa.setSenha("teste");
-		pessoa.setEmail("alessandropedrosoti@gmail.com");
-		pessoa.setNome("Alessandro");
-		pessoa.setSobrenome("Schuquel");
+		pessoa.setEmail("eduardopedroso@gmail.com");
+		pessoa.setNome("Eduardo froner");
+		pessoa.setSobrenome("pedroso");
 		
 		daoGeneric.salvar(pessoa);
 		
@@ -61,6 +61,17 @@ public class TesteHibernate {
 		 
 		
 		System.out.println(pessoa);
+		
+	}
+	
+	@Test
+	public void testeDeletar() {
+		
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa pessoa = daoGeneric.pesquisar4(2L, UsuarioPessoa.class);
+		
+		daoGeneric.deletarPoId(pessoa);
 		
 	}
 

@@ -30,6 +30,20 @@ public class DaoGeneric<E>{
 		return entidadeSalva;
 	}
 	
+	public void deletarPoId(E entidade) {
+		
+		Object id = HibernateUtil.getPrimaryKey(entidade);
+		
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin(); // da o start
+		
+		entityManager.createNativeQuery("delete from " + entidade.getClass().getSimpleName().toLowerCase() + " where id =" + id).executeUpdate();// faz o delete
+		entityTransaction.commit();// grava alteração no banco
+		
+		
+		
+	}
+	
 	public UsuarioPessoa pesquisar1(UsuarioPessoa entidade) { // sem o metodo de getPrimaryKey
 		
 		//Object id = HibernateUtil.getPrimaryKey(entidade);
