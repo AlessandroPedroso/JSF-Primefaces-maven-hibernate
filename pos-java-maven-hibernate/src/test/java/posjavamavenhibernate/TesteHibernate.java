@@ -1,5 +1,8 @@
 package posjavamavenhibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import Model.UsuarioPessoa;
@@ -69,10 +72,131 @@ public class TesteHibernate {
 		
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
-		UsuarioPessoa pessoa = daoGeneric.pesquisar4(2L, UsuarioPessoa.class);
+		UsuarioPessoa pessoa = daoGeneric.pesquisar4(6L, UsuarioPessoa.class);
 		
 		daoGeneric.deletarPoId(pessoa);
 		
 	}
+	
+	@Test
+	public void testeConsultarLista() {
+		
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		List<UsuarioPessoa> listPessoa = daoGeneric.listar(UsuarioPessoa.class);
+		
+		for (UsuarioPessoa usuarioPessoa : listPessoa) {
+			
+				System.out.println(usuarioPessoa);
+				System.out.println("-------------------------------------------------");
+		}
+
+	}
+	
+	@Test
+	public void testeQueryList() {
+		
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		//List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = 'Alessandro'").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			
+			System.out.println(usuarioPessoa);
+		}
+		
+	}
+	
+	@Test
+	public void testeQueryListMaxResult() {
+		
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		//List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
+		@SuppressWarnings("unchecked")
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().
+				createQuery("from UsuarioPessoa order by id")
+				.setMaxResults(2)
+				.getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			
+			System.out.println(usuarioPessoa);
+		}
+		
+	}
+	
+	@Test
+	public void testeQueryListParameter() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		@SuppressWarnings("unchecked")
+		List<UsuarioPessoa> list = daoGeneric.
+				getEntityManager().createQuery("from UsuarioPessoa where nome = :nome or sobrenome = :sobrenome")
+				.setParameter("nome", "Alessandro")
+				.setParameter("sobrenome", "schuquel")
+				.getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			
+			System.out.println(usuarioPessoa);
+		}
+		
+		
+	}
+	
+	@Test
+	public void testeQuerySomaIdade() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		//Long somaIdade = (Long) daoGeneric.getEntityManager().createQuery("select sum(u.idade) from UsuarioPessoa u").getSingleResult();
+		Double media = (Double) daoGeneric.getEntityManager().createQuery("select avg(u.idade) from UsuarioPessoa u").getSingleResult();
+		System.out.println("Soma de todas as idades é --> " + media);
+		
+	}
+	
+	
+	@Test
+	public void testeBuscaQuery() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		//UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = 'Alessandro'").getSingleResult();
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = :nome")
+				.setParameter("nome", "Alessandro")
+				.getSingleResult();
+		//Double media = (Double) daoGeneric.getEntityManager().createQuery("select avg(u.idade) from UsuarioPessoa u").getSingleResult();
+		System.out.println(pessoa);
+		
+	}
+	
+	@Test
+	public void testeNameQuery1() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		@SuppressWarnings("unchecked")
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("UsuarioPessoa.todos").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	
+	@Test
+	public void testeNameQuery2() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		@SuppressWarnings("unchecked")
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("UsuarioPessoa.buscaPorNome")
+		.setParameter("nome", "Alessandro")
+		.getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	
+	
+	
 
 }
