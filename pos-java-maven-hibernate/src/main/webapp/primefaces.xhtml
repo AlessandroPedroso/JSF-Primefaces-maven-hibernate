@@ -8,7 +8,6 @@
 	
 </h:head>
 <h:body>
-		
 			<h:form>
 					
 				<p:breadCrumb>
@@ -18,93 +17,92 @@
 				</p:breadCrumb>
 			
 			</h:form>
-	
 	<h:form>
 	<h:messages showDetail="true" showSummary="false"/>
-		<h:panelGrid columns="2">
+		<p:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
-			<h:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
+			<p:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
 			
 			<h:outputLabel>Nome:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" required="true"  requiredMessage="informe o nome!" />
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" required="true"  requiredMessage="informe o nome!" />
 			
 			<h:outputLabel>Sobrenome:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Informe o sobrenome!" />
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Informe o sobrenome!" />
 			
 			<h:outputLabel>E-mail:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
 			
 			<h:outputLabel>Idade:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 			
 			<h:outputLabel>Login:</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			
 			<h:outputLabel>Senha:</h:outputLabel>
-			<h:inputSecret value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
-		</h:panelGrid>
+			<p:password value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
+		</p:panelGrid>
 		<br/>
 		<br/>
-		<h:commandButton value="Salvar" action="#{usuarioPessoaManagedBean.salvar}" />
-		<h:commandButton value="Novo" action="#{usuarioPessoaManagedBean.novo}" />
+		<p:commandButton value="Salvar" action="#{usuarioPessoaManagedBean.salvar}" />
+		<p:commandButton value="Novo" action="#{usuarioPessoaManagedBean.novo}" />
+	</h:form>
 	
-	
-	
-	<h:dataTable value="#{usuarioPessoaManagedBean.listUsuarioPessoa}" var="user" cellpadding="15" border="1">
+	<h:form>
+	<p:dataTable value="#{usuarioPessoaManagedBean.listUsuarioPessoa}" var="user" cellpadding="15" border="1">
 		<f:facet name="header">Listas de Usuários</f:facet>
-		<h:column>
+		<p:column>
 			<f:facet name="header">Id</f:facet>
 			<h:outputText value="#{user.id}"/>
 		
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Nome</f:facet>
 			<h:outputText value="#{user.nome}"/>
 		
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Sobrenome</f:facet>
 			<h:outputText value="#{user.sobrenome}"/>
 		
-		</h:column>
+		</p:column>
 		
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">E-mail</f:facet>
 			<h:outputText value="#{user.email}"/>
 		
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Login</f:facet>
 			<h:outputText value="#{user.login}"/>
 		
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Idade</f:facet>
 			<h:outputText value="#{user.idade}"/>
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Editar</f:facet>
 			<h:commandLink value="Editar">
 				<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
 			</h:commandLink>
 		
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Remover</f:facet>
 			<h:commandLink value="Deletar" action="#{usuarioPessoaManagedBean.remover}">
 				<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
 			</h:commandLink>
 		
-		</h:column>
+		</p:column>
 	
-	</h:dataTable>
+	</p:dataTable>
 	</h:form>
 </h:body>  
 </html>
