@@ -39,10 +39,9 @@ public class DaoGeneric<E>{
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin(); // da o start
 		
+		
 		entityManager.createNativeQuery("delete from " + entidade.getClass().getSimpleName().toLowerCase() + " where id =" + id).executeUpdate();// faz o delete
 		entityTransaction.commit();// grava alteração no banco
-		
-		
 		
 	}
 	
