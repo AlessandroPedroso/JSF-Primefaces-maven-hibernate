@@ -19,8 +19,8 @@
 			
 			</h:form>
 	
-	<h:form>
-	<h:messages showDetail="true" showSummary="false"/>
+	<h:form id="formulario">
+	<h:messages showDetail="true" showSummary="false" id="msg"/>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
 			<h:inputText readonly="true" value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
@@ -53,9 +53,9 @@
 		<br/>
 		<h:commandButton value="Salvar" action="#{usuarioPessoaManagedBean.salvar}" />
 		<h:commandButton value="Novo" action="#{usuarioPessoaManagedBean.novo}" />
+	</h:form>
 	
-	
-	
+	<h:form id="formTable">
 	<h:dataTable value="#{usuarioPessoaManagedBean.listUsuarioPessoa}" var="user" cellpadding="15" border="1">
 		<f:facet name="header">Listas de Usuários</f:facet>
 		<h:column>
@@ -99,15 +99,16 @@
 			<h:commandLink immediate="true" id="botaoeditar">
 				<h:graphicImage url="resources/img/editar.png"/>
 				<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
-				<f:ajax execute="botaoeditar" render="@form" />
+				<f:ajax execute="botaoeditar" render=":formulario" />
 			</h:commandLink>
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Remover</f:facet>
-			<h:commandLink action="#{usuarioPessoaManagedBean.remover}" immediate="true">
+			<h:commandLink action="#{usuarioPessoaManagedBean.remover}" immediate="true" id="botaoremover">
 				<h:graphicImage url="resources/img/deletar.png"/>
 				<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaManagedBean.usuarioPessoa}"/>
+				<f:ajax execute="botaoremover" render="@form :formulario:msg" />
 			</h:commandLink>
 		</h:column>
 	

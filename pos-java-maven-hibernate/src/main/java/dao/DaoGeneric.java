@@ -32,7 +32,7 @@ public class DaoGeneric<E>{
 		return entidadeSalva;
 	}
 	
-	public void deletarPoId(E entidade) {
+	public void deletarPoId(E entidade) throws Exception {
 		
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		
