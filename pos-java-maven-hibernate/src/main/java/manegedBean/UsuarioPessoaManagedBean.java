@@ -11,14 +11,15 @@ import javax.faces.context.FacesContext;
 
 import Model.UsuarioPessoa;
 import dao.DaoGeneric;
+import dao.DaoUsuario;
 
 @ManagedBean(name="usuarioPessoaManagedBean")
 @ViewScoped
 public class UsuarioPessoaManagedBean {
 	
 	private UsuarioPessoa usuarioPessoa = new UsuarioPessoa();
-	private DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 	private List<UsuarioPessoa> listUsuarioPessoa = new ArrayList<UsuarioPessoa>();
+	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
 	
 	@PostConstruct
 	public void init() {
@@ -54,7 +55,7 @@ public class UsuarioPessoaManagedBean {
 		
 	try {
 		
-		daoGeneric.deletarPoId(usuarioPessoa);
+		daoGeneric.removerUsuario(usuarioPessoa);
 		listUsuarioPessoa.remove(usuarioPessoa);
 		usuarioPessoa = new UsuarioPessoa();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Removido com sucesso!"));
